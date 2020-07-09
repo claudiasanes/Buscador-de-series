@@ -4,47 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buscador de series</title>
-    <link href="./styles.reset.css" rel="stylesheet" />
-    <link href="./styles.style.css" rel="stylesheet" />
+    <link href="./assets/css/main.css" rel="stylesheet" />
   </head>
   <body>
-    <h1 class="main-tittle">Buscador de series</h1>
-    <input type="text" class="serie" value="" />
-    <button type="button" class="btn">SEARCH</button>
-    <section>
-      <h2>Resultados</h2>
-      <ul class="series-container">
-        <li class="serie">
-          <div class="poster-container">
-            <img src="" tittle="serie poster" class="serie-image" />
-          </div>
-          <p class="serie-tittle">title</p>
-        </li>
-        <li class="serie">
-          <div class="poster-container">
-            <img src="" tittle="serie poster" class="serie-image" />
-          </div>
-          <p class="serie-tittle">title</p>
-        </li>
-      </ul>
-    </section>
-    <section>
-      <h2>Favoritas</h2>
-      <ul class="fav-container">
-        <li class="fav-serie">
-          <div class="fav-poster-container">
-            <img src="" tittle="favorite serie poster" class="fav-image" />
-          </div>
-          <p class="fav-tittle">title</p>
-        </li>
-        <li class="fav-serie">
-          <div class="fav-poster-container">
-            <img src="" tittle="favorite serie poster" class="fav-image" />
-          </div>
-          <p class="fav-tittle">title</p>
-        </li>
-      </ul>
-    </section>
-    <script src="./js/main.js" type="text/javascript"></script>
+    <div class="wrapper">
+      <h1 class="main-tittle">Buscador de series</h1>
+      <input type="text" class="input" value="" />
+      <button type="button" class="btn">SEARCH</button>
+      <section>
+        <h2 class="section-tittle">Resultados</h2>
+        <ul class="shows-container">
+          <li class="show-preview">
+            <div class="poster-container">
+              <img src="" tittle="show poster" class="show-image" />
+            </div>
+            <p class="show-tittle">title</p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="section-tittle">Favoritas</h2>
+        <ul class="fav-container">
+          <li class="fav-show-preview">
+            <div class="fav-poster-container">
+              <img src="" tittle="favorite show poster" class="fav-image" />
+            </div>
+            <p class="fav-tittle">title</p>
+          </li>
+          <li class="fav-show">
+            <div class="fav-poster-container">
+              <img src="" tittle="favorite show poster" class="fav-image" />
+            </div>
+            <p class="fav-tittle">title</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <script src="./assets/js/main.js" type="text/javascript"></script>
   </body>
 </html>

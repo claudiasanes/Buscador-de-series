@@ -1,2 +1,61 @@
 @import 'core/variables';
 @import 'core/reset';
+
+body {
+  list-style-type: none;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+.wrapper {
+  padding: 40px;
+}
+
+.section-tittle {
+  font-size: 24px;
+  margin: 16px 0px;
+}
+
+.shows-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.show-preview {
+  width: 250px;
+  height: 350px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.bg-normal {
+  background-color: lightblue;
+}
+.bg-clicked {
+  background-color: blue;
+}
+
+.color-normal {
+  color: fuchsia;
+}
+
+.color-clicked {
+  color: pink;
+}
+
+.poster-container {
+  height: 270px;
+  width: 210px;
+  background-color: white;
+}
+
+.show-image {
+  width: 100%;
+}
