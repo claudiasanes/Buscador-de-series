@@ -19,7 +19,9 @@ function getShowsData() {
       showsList = data;
       //console.log(showsList);
       paintShowsList();
+      paintFavorites();
       addShowsListeners();
+      console.log(paintFavorites());
     });
 }
 
@@ -67,29 +69,31 @@ function favoritesHandler(ev) {
 }
 
 function addToFavorites(targetElem) {
-  console.log(targetElem);
-
+  // recoge el id del elemento clickado
   const showID = parseInt(targetElem.id);
+  // constante que encuentra en favoritos el índice del objeto que tenga el mismo id que el objeto de mi lista de resultados, como lo que queremos no es el índice, sino el contenido el objeto, tendremos que hacer
   const showResultFavs = favorites.findIndex((show) => show.show.id === showID);
-  console.log(showResultFavs);
-
+  // condicional para, si el objeto no está favoritos aún (me devuelve -1) entonces...
   if (showResultFavs === -1) {
+    // ... constante que dentro del data de la API encuentra y recoge el objeto cuyo id coincida con el id del elemento clickado
     const clickedShow = showsList.find((show) => show.show.id === showID);
     targetElem.classList.add('bg-clicked');
     targetElem.classList.remove('bg-normal');
     targetElem.classList.add('color-clicked');
     targetElem.classList.remove('color-normal');
+
     favorites.push(clickedShow);
   } else {
+    //
     targetElem.classList.remove('bg-clicked');
     targetElem.classList.add('bg-normal');
     targetElem.classList.remove('color-clicked');
     targetElem.classList.add('color-normal');
-    //
     favorites.splice(showResultFavs, 1);
   }
   setLocalStorage(favorites);
   getLocalStorage(favorites);
+  paintFavorites(favorites);
   console.log(favorites);
 }
 
@@ -104,4 +108,24 @@ function getLocalStorage() {
   } else {
     return (favorites = []);
   }
+}
+
+function paintFavorites() {
+  const favsContainer = document.querySelector('.fav-container');
+  const imgDefault =
+    'https://via.placeholder.com/210x270/ffffff/666666/?text=TV';
+  let codeHtml = '';
+  for (let i = 0; i < favorites.length; i++) {
+    codeHtml += `<li class="fav-show-preview" id="${favorites[i].show.id}">`;
+    codeHtml += `<div class="fav-poster-container">`;
+    codeHtml += `<img src="${
+      favorites[i].show.image === null
+        ? imgDefault
+        : favorites[i].show.image.medium
+    }" tittle="favorite show poster" class="fav-image" />`;
+    codeHtml += `</div>`;
+    codeHtml += `<p class="fav-tittle">${favorites[i].show.name}</p>`;
+    codeHtml += `</li>`;
+  }
+  return (favsContainer.innerHTML = codeHtml);
 }
