@@ -17,28 +17,42 @@ function getShowsData() {
     .then((response) => response.json())
     .then((data) => {
       showsList = data;
-      console.log(showsList);
-      paintShowsList(showsList);
+      //console.log(showsList);
+      paintShowsList();
+      addShowsListeners();
     });
 }
 
 // PAINT DATA
 
-function paintShowsList(array) {
+function paintShowsList() {
   const showsContainer = document.querySelector('.shows-container');
   let codeHtml = '';
-  for (let i = 0; i < array.length; i++) {
-    const Showimage = array[i].show.image.medium;
-    const Showname = array[i].show.name;
-    const Showid = array[i].show.id;
-    codeHtml += `<li class="show-preview bg-normal" id="${Showid}">`;
-    codeHtml += ` <div class="poster-container">`;
-    codeHtml += `<img src="https://via.placeholder.com/210x270/ffffff/666666/?text=TV" tittle="show poster" class="show-image" /> </div>`;
-    codeHtml += `<p class="show-tittle color-normal">${Showname}</p> </li>`;
+  for (let i = 0; i < showsList.length; i++) {
+    const favoriteClass = () => {};
+    const checkImg = () => {
+      if (showsList[i].show.image === null) {
+        return 'https://via.placeholder.com/210x270/ffffff/666666/?text=TV';
+      } else {
+        return showsList[i].show.image.medium;
+      }
+    };
+    const showName = showsList[i].show.name;
+    const showId = showsList[i].show.id;
+    codeHtml += `<li class="show-preview bg-normal ${favoriteClass}" id="${showId}"><div class="poster-container">`;
+    codeHtml += `<img src="${
+      checkImg()
+      /*showsList[i].show.image === null
+        ? imgDefault
+        : showsList[i].show.image.medium
+    */
+    }" title="show poster" class="show-image" /> </div>`;
+    codeHtml += `<p class="show-tittle color-normal">${showName}</p> </li>`;
   }
   return (showsContainer.innerHTML = codeHtml);
 }
 
+// llamo a todos los li (contenedores de las series) y les añado listener de click
 function addShowsListeners() {
   let ShowElemList = document.querySelectorAll('li');
   for (const showElem of ShowElemList) {
@@ -48,7 +62,46 @@ function addShowsListeners() {
 
 function favoritesHandler(ev) {
   const target = ev.currentTarget;
+
   addToFavorites(target);
 }
 
-function addToFavorites() {}
+function addToFavorites(targetElem) {
+  console.log(targetElem);
+
+  const showID = parseInt(targetElem.id);
+  const showResultFavs = favorites.findIndex((show) => show.show.id === showID);
+  console.log(showResultFavs);
+
+  if (showResultFavs === -1) {
+    const clickedShow = showsList.find((show) => show.show.id === showID);
+    targetElem.classList.add('bg-clicked');
+    targetElem.classList.remove('bg-normal');
+    targetElem.classList.add('color-clicked');
+    targetElem.classList.remove('color-normal');
+    favorites.push(clickedShow);
+  } else {
+    targetElem.classList.remove('bg-clicked');
+    targetElem.classList.add('bg-normal');
+    targetElem.classList.remove('color-clicked');
+    targetElem.classList.add('color-normal');
+    //
+    favorites.splice(showResultFavs, 1);
+  }
+  setLocalStorage(favorites);
+  getLocalStorage(favorites);
+  console.log(favorites);
+}
+
+function setLocalStorage(favorites) {
+  localStorage.setItem('favs', JSON.stringify(favorites));
+}
+
+function getLocalStorage() {
+  let favorites = JSON.parse(localStorage.getItem('favs'));
+  if (favorites !== null) {
+    return favorites;
+  } else {
+    return (favorites = []);
+  }
+}
