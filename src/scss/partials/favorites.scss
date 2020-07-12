@@ -1,0 +1,29 @@
+.fav-preview {
+  width: 210px;
+  height: 280px;
+  border-radius: 6px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow: hidden;
+  background-color: #eb4e27;
+  border: 2px solid black;
+}
+
+.fav-poster-container {
+  height: 240px;
+  width: 100%;
+  background-color: white;
+  overflow: hidden;
+}
+
+.fav-image {
+  width: 100%;
+}
+
+.fav-tittle {
+  padding: 16px;
+  color: white;
+}
