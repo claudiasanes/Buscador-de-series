@@ -166,14 +166,18 @@ function getFavoritesLocalStorage() {
 // estructura del html para pinta 1 favorito
 function paintFavorite(fav) {
   let codeHtml = `
-    <li class="fav-preview" id="${fav.show.id}">
+    <li class="fav-preview ">
+    <div class="fav-obj-container">
       <div class="fav-poster-container">
       <img src="${checkImg(
         fav.show.image
       )}" tittle="favorite show poster" class="fav-image" />
       </div>
       <p class="fav-tittle">${fav.show.name}</p>
+      </div>
+      <button class="remove-btn" id="${fav.show.id}"> X </button>
     </li>
+   
   `;
   return codeHtml;
 }
@@ -192,8 +196,8 @@ function paintFavorites() {
 
 // igual que en los shows de la sección de resultados, aquí llamo a todos los li de dentro del contenedor de favoritos, los recorromediante for of y les añado a todos un listener
 function addFavsListeners() {
-  let ShowFAvList = document.querySelectorAll('.fav-container li');
-  for (const favElem of ShowFAvList) {
+  let ShowFAvBtn = document.querySelectorAll('.remove-btn');
+  for (const favElem of ShowFAvBtn) {
     favElem.addEventListener('click', favoriteClickHandler);
   }
 }

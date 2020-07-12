@@ -5,7 +5,7 @@
 @import 'partials/results';
 
 body {
-  font-family: sans-serif;
+  font-family: $font-family;
   background-color: #b5b5b5;
 }
 
@@ -28,4 +28,5 @@ body {
   display: block;
   border-bottom: 2px solid black;
   text-transform: uppercase;
+  font-weight: 200;
 }
