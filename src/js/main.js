@@ -1,15 +1,13 @@
 'use strict';
 
 // declaro las variables principales con las que trabajaré
-let showsList;
-let favorites;
+let showsList = [];
+let favorites = getFavoritesLocalStorage();
 
 // INICIO DE PÁGINA
 
 // función de inicio, el array de los resultados de búsqueda aparece vacío y el de favoritos toma los datos de localstorage
 function init() {
-  showsList = [];
-  favorites = getFavoritesLocalStorage();
   // llamamos al botón que va a ejecutar la función de buscar las serie que yo meta en el input
   const searchButton = document.querySelector('.search');
   // definimos el listener al hacer click en el form (si lo ponía en el botón no podía hacer ejecutar con el botón de Enter)
@@ -35,7 +33,8 @@ function getShowsData(event) {
 }
 
 function notFound() {
-  let codeHtml = 'No hemos encontrado la serie que buscas, prueba de nuevo :)';
+  let codeHtml =
+    '<p class="empty-state"> No hemos encontrado la serie que buscas, prueba de nuevo 😊</p>';
   return codeHtml;
 }
 
@@ -50,38 +49,31 @@ function checkImg(img) {
   }
 }
 
-// me hace la estructura html de 1 show
-function paintShow(showElem) {
-  // mete la clase 'bg-normal' por defecto, pero conprueba la función isFavorite a través del id si está ya en favoritos, si está me pone la clase 'bg-clicked'
-  let showClass = 'bg-normal';
-  if (isFavorite(showElem.show.id)) {
-    showClass = 'bg-clicked';
-  }
-  let codeHtml = `
-   <li class="show-preview ${showClass}" id="${showElem.show.id}">
-    <div class="poster-container">
-      <img src="${checkImg(
-        showElem.show.image
-      )}" title="show poster" class="show-image" /> 
-    </div>
-  <p class="show-tittle color-normal">${showElem.show.name}</p> 
-  </li>`;
-  return codeHtml;
-}
-
 function paintShowsList() {
   const showsContainer = document.querySelector('.shows-container');
   let codeHtml = '';
-  // si mi array de resultados es igual a 0 entonces me ejecutas la función notFound si no...
-  if (showsList.length === 0) {
-    codeHtml = notFound();
-    // ... me recorres todo el array de resultados y me los pintas
-  } else {
-    for (let i = 0; i < showsList.length; i++) {
-      codeHtml += paintShow(showsList[i]);
+  for (let i = 0; i < showsList.length; i++) {
+    // si mi array de resultados es igual a 0 entonces me ejecutas la función notFound si no...
+    if (showsList.length === 0) {
+      codeHtml = notFound();
+      // ... me recorres todo el array de resultados y me los pintas
+    } else {
+      // mete la clase 'bg-normal' por defecto, pero conprueba la función isFavorite a través del id si está ya en favoritos, si está me pone la clase 'bg-clicked'
+      let showClass = 'bg-normal';
+      if (isFavorite(showsList[i].show.id)) {
+        showClass = 'bg-clicked';
+      }
+      codeHtml += `<li class="show-preview ${showClass}" id="${showsList[i].show.id}">`;
+      codeHtml += `<div class="poster-container">`;
+      codeHtml += `<img src="${checkImg(
+        showsList[i].show.image
+      )}" title="show poster" class="show-image" /> `;
+      codeHtml += `</div>`;
+      codeHtml += `<p class="show-tittle color-normal">${showsList[i].show.name}</p> `;
+      codeHtml += `</li>`;
     }
+    showsContainer.innerHTML = codeHtml;
   }
-  showsContainer.innerHTML = codeHtml;
   // una vez pintados ya tienen que tener los listeners por si les clico
   addShowsListeners();
 }
@@ -102,7 +94,7 @@ function favoritesHandler(ev) {
   addToFavorites(target);
 }
 
-// encuntra el indice, dentro del array de favoritos, si hay alguna de la series cuyo id coincida con el id que yo he clickado
+// encuentra el indice, dentro del array de favoritos, si hay alguna de la series cuyo id coincida con el id que yo he clickado
 function isFavorite(clickedID) {
   const index = favorites.findIndex((fav) => fav.show.id === clickedID);
   // devuelve booleano, si no coincide es false y si coincide es true
@@ -163,31 +155,22 @@ function getFavoritesLocalStorage() {
 
 // PAINT FAVORITES
 
-// estructura del html para pinta 1 favorito
-function paintFavorite(fav) {
-  let codeHtml = `
-    <li class="fav-preview ">
-    <div class="fav-obj-container">
-      <div class="fav-poster-container">
-      <img src="${checkImg(
-        fav.show.image
-      )}" tittle="favorite show poster" class="fav-image" />
-      </div>
-      <p class="fav-tittle">${fav.show.name}</p>
-      </div>
-      <button class="remove-btn" id="${fav.show.id}"> X </button>
-    </li>
-   
-  `;
-  return codeHtml;
-}
-
 // me pinta dentro del contenedor de favoritos los objetos que estén dentro del array favorites
 function paintFavorites() {
   const favsContainer = document.querySelector('.fav-container');
   let codeHtml = '';
   for (let i = 0; i < favorites.length; i++) {
-    codeHtml += paintFavorite(favorites[i]);
+    codeHtml += `<li class="fav-preview ">`;
+    codeHtml += `<div class="fav-obj-container">`;
+    codeHtml += `<div class="fav-poster-container">`;
+    codeHtml += `<img src="${checkImg(
+      favorites[i].show.image
+    )}" tittlefavorites[i]orite show poster" class="fav-image" />`;
+    codeHtml += `</div>`;
+    codeHtml += `<p class="fav-tittle">${favorites[i].show.name}</p>`;
+    codeHtml += `</div>`;
+    codeHtml += `<button class="remove-btn" id="${favorites[i].show.id}"> X </button>`;
+    codeHtml += ` </li>`;
   }
   favsContainer.innerHTML = codeHtml;
   // una vez pintados me pone los listeners para poder clickarlos

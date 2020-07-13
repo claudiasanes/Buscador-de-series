@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscador de series</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,200;0,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/487df2ea51.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="./assets/css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1 class="main-tittle">Buscador de series</h1>
+        <form class="search form-container">
+          <input
+            type="text"
+            class="input"
+            value=""
+            placeholder="Six Feet Under"
+          />
+          <button type="submit" class="btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </header>
+    <main class="main-container">
+      <section>
+        <div class="wrapper">
+          <h2 class="section-tittle">Favoritas</h2>
+          <ul class="fav-container">
+            <!-- aquí van los elementos favoritos del array favorites -->
+          </ul>
+        </div>
+      </section>
+      <section>
+        <div class="wrapper results-container">
+          <h2 class="section-tittle">Resultados</h2>
+          <ul class="shows-container">
+            <!-- aquí van los resultados de búsqueda del array showsList -->
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="./assets/js/main.js" type="text/javascript"></script>
+  </body>
+</html>

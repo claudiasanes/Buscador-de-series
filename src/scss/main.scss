@@ -1,12 +1,13 @@
-@import 'core/variables';
 @import 'core/reset';
+@import 'core/variables';
+@import 'core/mixins';
 @import 'partials/header';
 @import 'partials/favorites';
 @import 'partials/results';
 
 body {
   font-family: $font-family;
-  background-color: #b5b5b5;
+  background-color: $color-main;
 }
 
 .wrapper {
@@ -16,17 +17,22 @@ body {
 // MAIN
 
 .main-container {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 30% 70%;
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include tablet {
+    flex-direction: row;
+  }
 }
 
 .section-tittle {
   font-size: 24px;
+  font-family: $font-family;
   padding-bottom: 20px;
   margin-bottom: 32px;
   display: block;
-  border-bottom: 2px solid black;
+  width: 100%;
+  border-bottom: 2px solid $color-dark;
   text-transform: uppercase;
   font-weight: 200;
 }
