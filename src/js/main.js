@@ -97,7 +97,7 @@ function favoritesHandler(ev) {
 // encuentra el indice, dentro del array de favoritos, si hay alguna de la series cuyo id coincida con el id que yo he clickado
 function isFavorite(clickedID) {
   const index = favorites.findIndex((fav) => fav.show.id === clickedID);
-  // devuelve booleano, si no coincide es false y si coincide es true
+  // devuelve booleano, cunado devuleve -1 significa que no ha encontrado en favoritos el elemento clickado en la lista de resultados, por lo que es false y si coincide es true
   return index === -1 ? false : true;
 }
 
