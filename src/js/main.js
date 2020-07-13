@@ -52,12 +52,9 @@ function checkImg(img) {
 function paintShowsList() {
   const showsContainer = document.querySelector('.shows-container');
   let codeHtml = '';
-  for (let i = 0; i < showsList.length; i++) {
-    // si mi array de resultados es igual a 0 entonces me ejecutas la función notFound si no...
-    if (showsList.length === 0) {
-      codeHtml = notFound();
-      // ... me recorres todo el array de resultados y me los pintas
-    } else {
+  //si hay data me recorres todo el array de resultados y me los pintas, si no...
+  if (showsList.length) {
+    for (let i = 0; i < showsList.length; i++) {
       // mete la clase 'bg-normal' por defecto, pero conprueba la función isFavorite a través del id si está ya en favoritos, si está me pone la clase 'bg-clicked'
       let showClass = 'bg-normal';
       if (isFavorite(showsList[i].show.id)) {
@@ -72,8 +69,11 @@ function paintShowsList() {
       codeHtml += `<p class="show-tittle color-normal">${showsList[i].show.name}</p> `;
       codeHtml += `</li>`;
     }
-    showsContainer.innerHTML = codeHtml;
+    // ... si mi array de resultados es igual a 0 entonces me ejecutas la función notFound
+  } else {
+    codeHtml = notFound();
   }
+  showsContainer.innerHTML = codeHtml;
   // una vez pintados ya tienen que tener los listeners por si les clico
   addShowsListeners();
 }
@@ -165,7 +165,7 @@ function paintFavorites() {
     codeHtml += `<div class="fav-poster-container">`;
     codeHtml += `<img src="${checkImg(
       favorites[i].show.image
-    )}" tittlefavorites[i]orite show poster" class="fav-image" />`;
+    )}" tittle="favorite show poster" class="fav-image" />`;
     codeHtml += `</div>`;
     codeHtml += `<p class="fav-tittle">${favorites[i].show.name}</p>`;
     codeHtml += `</div>`;
@@ -175,6 +175,7 @@ function paintFavorites() {
   favsContainer.innerHTML = codeHtml;
   // una vez pintados me pone los listeners para poder clickarlos
   addFavsListeners();
+  addResetListener();
 }
 
 // igual que en los shows de la sección de resultados, aquí llamo a todos los li de dentro del contenedor de favoritos, los recorromediante for of y les añado a todos un listener
@@ -192,4 +193,18 @@ function favoriteClickHandler(ev) {
   // repinta las listas de favoritos y de resultados
   paintShowsList();
   paintFavorites();
+}
+
+// RESET
+
+function addResetListener() {
+  let resetBtn = document.querySelector('.reset-btn');
+  resetBtn.addEventListener('click', resetClickHandler);
+}
+
+function resetClickHandler() {
+  favorites = [];
+  paintFavorites();
+  setLocalStorage(favorites);
+  paintShowsList();
 }

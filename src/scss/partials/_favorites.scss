@@ -57,3 +57,22 @@
 .remove-btn:hover {
   background-color: transparentize($color-light, $amount: 0.6);
 }
+
+.reset-btn {
+  border: none;
+  border-radius: 50px;
+  padding: 12px;
+  width: 80px;
+  margin-bottom: 32px;
+  background-color: $color-main;
+  transition: 0.5s;
+}
+
+.reset-btn:hover {
+  background-color: transparentize($color-details, $amount: 0.6);
+}
+
+.reset-btn:focus {
+  background-color: $color-details;
+  outline: none;
+}
