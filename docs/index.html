@@ -14,27 +14,28 @@
     ></script>
     <link href="./assets/css/main.css" rel="stylesheet" />
   </head>
+
   <body>
     <header>
       <div class="header-container">
         <h1 class="main-tittle">Buscador de series</h1>
         <form class="search form-container">
+          <button type="submit" class="btn">
+            <i class="fas fa-search"></i>
+          </button>
           <input
             type="text"
             class="input"
             value=""
             placeholder="Six Feet Under"
           />
-          <button type="submit" class="btn">
-            <i class="fas fa-search"></i>
-          </button>
         </form>
       </div>
     </header>
     <main class="main-container">
       <section>
         <div class="wrapper">
-          <h2 class="section-tittle">Favoritas</h2>
+          <h2 class="section-tittle"><i class="fas fa-heart"></i>Favoritas</h2>
           <button class="reset-btn">RESET</button>
           <ul class="fav-container">
             <!-- aquí van los elementos favoritos del array favorites -->
