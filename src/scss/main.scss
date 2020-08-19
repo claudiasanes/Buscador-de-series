@@ -7,11 +7,18 @@
 
 body {
   font-family: $font-family;
-  background-color: $color-main;
+  background: linear-gradient(
+    180deg,
+    rgba(213, 213, 213, 1) 56%,
+    $color-neon 86%
+  );
+  background-attachment: fixed;
 }
-
 .wrapper {
   padding: 20px;
+  @include tablet {
+    padding: 40px;
+  }
 }
 
 // MAIN
@@ -35,4 +42,9 @@ body {
   border-bottom: 2px solid $color-dark;
   text-transform: uppercase;
   font-weight: 200;
+}
+
+.fa-heart {
+  margin-right: 12px;
+  color: $color-main;
 }
