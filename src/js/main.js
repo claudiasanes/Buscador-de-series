@@ -23,7 +23,7 @@ function getShowsData(event) {
   // como tengo un form, cuando pulse se enviaría el formulario y no queremos que eso suceda
   event.preventDefault();
   const show = document.querySelector('.input').value;
-  const url = 'http://api.tvmaze.com/search/shows?q=';
+  const url = 'https://api.tvmaze.com/search/shows?q=';
   fetch(url + show)
     .then((response) => response.json())
     .then((data) => {
