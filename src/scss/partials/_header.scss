@@ -25,6 +25,11 @@ header {
   line-height: 42px;
   text-transform: uppercase;
   font-weight: 700;
+
+  @include tablet {
+    font-size: 72px;
+    line-height: 72px;
+  }
 }
 .form-container {
   display: flex;
